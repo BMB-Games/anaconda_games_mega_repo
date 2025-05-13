@@ -1,14 +1,20 @@
+import os.path
+
 import pygame
 
 WIDTH = 640
 HEIGHT = 480
+
+base_path = os.path.dirname(os.path.abspath(__file__))
+imag_path = os.path.join(base_path, "images", "football.png")
+
 
 pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT), 0, 32)
 pygame.display.set_caption("Test")
 screen.fill((0, 0, 0))
 
-ball = pygame.image.load("./images/football.png")
+ball = pygame.image.load(imag_path)
 ball = pygame.transform.scale(ball, (24, 24))
 
 ball_y = HEIGHT//2 - ball.get_height()//2
