@@ -1,5 +1,4 @@
 import os.path
-
 import pygame
 
 WIDTH = 640
@@ -25,7 +24,7 @@ game_over = False
 while not game_over:
     screen.fill((0, 0, 0))
     for event in pygame.event.get():
-        if event.type == pygame.QUIT:
+        if event.type == pygame.QUIT or pygame.key.get_pressed()[pygame.K_ESCAPE]:
             game_over = True
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RIGHT and ball_x + ball.get_width() < WIDTH:
