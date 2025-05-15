@@ -15,8 +15,8 @@ screen.fill((0, 0, 0))
 ball = pygame.image.load(imag_path)
 ball = pygame.transform.scale(ball, (24, 24))
 
-ball_y = HEIGHT // 2 - ball.get_height() // 2
-ball_x = WIDTH // 2 - ball.get_width() // 2
+ball_y = HEIGHT / 2 - ball.get_height() / 2
+ball_x = WIDTH / 2 - ball.get_width() / 2
 
 game_over = False
 
@@ -30,16 +30,23 @@ while not game_over:
         if (event.type == pygame.QUIT
                 or pressed[pygame.K_ESCAPE]):
             game_over = True
-    if pressed[pygame.K_RIGHT] and ball_x + ball.get_width() < WIDTH:
+    if pressed[pygame.K_RIGHT]:
         ball_x += 0.8 * dt
-    if pressed[pygame.K_LEFT] and ball_x > ball.get_width() / 2:
+    if pressed[pygame.K_LEFT]:
         ball_x -= 0.8 * dt
-    if pressed[pygame.K_UP] and ball_y > ball.get_height() / 2:
+    if pressed[pygame.K_UP]:
         ball_y -= 0.8 * dt
-    if pressed[pygame.K_DOWN] and ball_y + ball.get_height() < HEIGHT:
+    if pressed[pygame.K_DOWN]:
         ball_y += 0.8 * dt
+
+    # Ensure the ball stays within screen boundaries
+    ball_x = max(0, min(WIDTH - ball.get_width(), ball_x))
+    ball_y = max(0, min(HEIGHT - ball.get_height(), ball_y))
+
     if pressed[pygame.K_SPACE]:
-        ball_x, ball_y = 0, 0
+        # Reset ball to a center of screen
+        ball_x = WIDTH / 2 - ball.get_width() / 2
+        ball_y = HEIGHT / 2 - ball.get_height() / 2
 
     screen.blit(ball, (ball_x, ball_y))
     pygame.display.update()
